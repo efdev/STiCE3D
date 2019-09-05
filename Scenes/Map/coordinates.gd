@@ -43,17 +43,19 @@ func _move_pickable():
 
 func _newMap():
 	gridMap.clear() #clear all cells
-	gridMap.set_cell_item(tempCell.x,tempCell.y-1,tempCell.z, 0, 0)	#set the spot where the player stands new
+	if tempCell != null:
+		gridMap.set_cell_item(tempCell.x,tempCell.y-1,tempCell.z, 0, 0)	#set the spot where the player stands new
 	spawnCoordinates.clear()	#remove all spawn coordinates
 	randomize()
 	var x = 0
 	var z = 0
-	while x <= 20:
-		while z <= 20:
-			if x == tempCell.x && z ==tempCell.z:
+	while x <= 25:
+		while z <= 25:
+			if tempCell != null:
+				if x == tempCell.x && z ==tempCell.z:
 				#if the loop is at the point where the player stands ignore this position
-				pass
-			elif randi()%4 != 1:	#random chance for a empty field/pillar
+					pass
+			if randi()%4 != 1:	#random chance for a empty field/pillar
 				var height = randi()%5+1	#pillar height
 				spawnCoordinates.push_back(gridMap.map_to_world(x, height, z))	#add top of the pillar to possible spawn coordinates
 				for y in height:
@@ -62,8 +64,13 @@ func _newMap():
 			z += 1
 		z = 0
 		x += 1
-		
 	_move_pickable()	#move pickable to a new spawn coordinate
+	
+func _rebuildMap(var usedCells):
+	gridMap.clear()
+	for cell in usedCells:
+		gridMap.set_cell_item(cell.x, cell.y ,cell.z,0,0)
+	
 
 remote func move_pick():
 	#the function which is called from clients

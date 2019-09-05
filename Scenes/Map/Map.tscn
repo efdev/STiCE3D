@@ -20,19 +20,6 @@ cell_size = Vector3( 12, 12, 12 )
 collision_layer = 515
 collision_mask = 515
 data = {
-"cells": PoolIntArray( 196608, 0, 1073741824, 262142, 0, 0, 262143, 0, 536870912, 196608, 1, 0, 262142, 1, 1610612736, 262143, 1, 0, 196608, 2, 0, 262142, 2, 0, 262143, 2, 0 )
-}
-__meta__ = {
-"_editor_clip_": 0,
-"_editor_floor_": Vector3( 0, 0, 0 )
-}
-
-[node name="GridMap2" type="GridMap" parent="."]
-mesh_library = ExtResource( 4 )
-cell_size = Vector3( 12, 12, 12 )
-collision_layer = 515
-collision_mask = 515
-data = {
 "cells": PoolIntArray(  )
 }
 __meta__ = {

@@ -45,6 +45,7 @@ func _on_Button_close_pressed():
 
 remote func register_player():
 	playerAttributes.player2IDs.push_back(get_tree().get_rpc_sender_id()) 	#add network id
+	print(playerAttributes.player2IDs)
 	for i in get_node("/root/Game/Players").get_children():
 		i.free()
 		
@@ -74,11 +75,12 @@ remote func ready_to_start(var id):
 
 	if readyIDs.size() == playerAttributes.player2IDs.size():
 		for id in readyIDs:
-			rpc_id(id, "rebuild_map", var2str(coordinates.gridCells))
+			rpc_id(id, "rebuild_map", var2str(coordinates.gridMap.get_used_cells()))
 			coordinates._move_pickable()
 		
 remote func rebuild_map(var gridMap):
 	var usedCells = str2var(gridMap)
+	print(gridMap)
 	coordinates._rebuildMap(usedCells)
 
 func _player_connected(id):
@@ -98,6 +100,8 @@ func _connected_fail():
 	print("connect failed")
 
 func _server_disconnected():
+	for player in playerAttributes.player2IDs:
+		get_node("/root/Game/Players/"+str(player)).free()
 	print("server disconnected")
 
 
