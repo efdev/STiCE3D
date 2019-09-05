@@ -55,11 +55,17 @@ func _newMap():
 				if x == tempCell.x && z ==tempCell.z:
 				#if the loop is at the point where the player stands ignore this position
 					pass
-			if randi()%4 != 1:	#random chance for a empty field/pillar
-				var height = randi()%5+1	#pillar height
-				spawnCoordinates.push_back(gridMap.map_to_world(x, height, z))	#add top of the pillar to possible spawn coordinates
-				for y in height:
-					gridMap.set_cell_item(x,y,z, 0, 0) #build the pillar
+				if randi()%4 != 1:	#random chance for a empty field/pillar
+					var height = randi()%5+1	#pillar height
+					spawnCoordinates.push_back(gridMap.map_to_world(x, height, z))	#add top of the pillar to possible spawn coordinates
+					for y in height:
+						gridMap.set_cell_item(x,y,z, 0, 0) #build the pillar
+			else:
+				if randi()%4 != 1:	#random chance for a empty field/pillar
+					var height = randi()%5+1	#pillar height
+					spawnCoordinates.push_back(gridMap.map_to_world(x, height, z))	#add top of the pillar to possible spawn coordinates
+					for y in height:
+						gridMap.set_cell_item(x,y,z, 0, 0) #build the pillar
 
 			z += 1
 		z = 0
