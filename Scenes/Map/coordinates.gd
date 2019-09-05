@@ -19,7 +19,7 @@ func _add_pickable(var picki):
 func _move_pickable():
 	if not playerAttributes.MultiPlayer:
 		#new map generation is singleplayer only at this momement
-		if playerAttributes.count == 5*counter:
+		if playerAttributes.count == 1*counter:
 			counter +=1	#every multiple of 5 the map is new generated 
 			_newMap()
 		elif  not spawnCoordinates.empty():
@@ -49,13 +49,13 @@ func _newMap():
 	randomize()
 	var x = 0
 	var z = 0
-	while x <= 25:
-		while z <= 25:
+	while x <= 15:
+		while z <= 15:
 			if tempCell != null:
 				if x == tempCell.x && z ==tempCell.z:
 				#if the loop is at the point where the player stands ignore this position
 					pass
-				if randi()%4 != 1:	#random chance for a empty field/pillar
+				elif randi()%4 != 1:	#random chance for a empty field/pillar
 					var height = randi()%5+1	#pillar height
 					spawnCoordinates.push_back(gridMap.map_to_world(x, height, z))	#add top of the pillar to possible spawn coordinates
 					for y in height:
