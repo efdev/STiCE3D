@@ -16,10 +16,19 @@ func _on_Button_pressed():
 	##this is from before the map is generated through a gridMap ##
 	path = $Path.get_text()
 	var fileCheck = File.new()	#opens a new file
-	if fileCheck.file_exists(path):
-		var sceneToLoad = load(path) #loads the scene
-		var scene = sceneToLoad.instance() #instances the loaded content
-		get_tree().get_root().add_child(scene)
+	print(path)
+	if fileCheck.file_exists(path+".pck"):
+		ProjectSettings.load_resource_pack(path+".pck")
+		if fileCheck.file_exists(path+".tscn"):
+			var sceneToLoad = load(path+".tscn") #loads the scene
+			
+			#remove map in use
+			get_node("/root/Game/Map").free()
+			
+			var scene = sceneToLoad.instance() #instances the loaded content
+			get_node("/root/Game").add_child(scene)
+		else:
+			$Error.popup()	#popup the error popup
 
 	else:	#if this file not exists popup the error message
 		$Error.popup()	#popup the error popup

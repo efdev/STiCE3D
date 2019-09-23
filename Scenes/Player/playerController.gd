@@ -50,11 +50,16 @@ func _on_edge():
 		
 func process_input():
 	#---WALKING---#
+			if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+				$PlayerUI.visible = true
+			else:
+				$PlayerUI.visible = false
+	
 			dir = Vector3()
 			var cam_xform = camera.get_global_transform()
-		
+
 			var input_movement_vector = Vector2()
-			
+
 			if Input.is_action_pressed("move_forward"):
 					input_movement_vector.y += 1
 			if Input.is_action_pressed("move_backward"):
@@ -64,27 +69,27 @@ func process_input():
 			if Input.is_action_pressed("move_right"):
 					input_movement_vector.x += 1
 			#--------------#
-			
+
 			#---JUMP MOVEMENT---#
 			#---do the different jump movements---#
 			if jumpState == "jumpBackward":
 				dir = Vector3(0, 0, 0)
 				input_movement_vector.y -= 1
-		
+
 			if jumpState == "jumpForward":
 				dir = Vector3(0, 0, 0)
 				input_movement_vector.y += 1
-			
+
 			if jumpState == "jumpOnTop":
 				dir = Vector3(0, 0, 0)
 				input_movement_vector.y += 0.01
-		
+
 			if jumpState == "jumpRight":
 				MAX_SPEED = MAX_SPEED_AIR
 				dir = Vector3(0, 0, 0)
 				input_movement_vector.y += 0.5
 				input_movement_vector.x += 1
-		
+
 			if jumpState == "jumpLeft":
 				MAX_SPEED = MAX_SPEED_AIR
 				dir = Vector3(0, 0, 0)
@@ -101,13 +106,13 @@ func process_input():
 				if Input.is_action_just_pressed("jump"):
 					vel.y = JUMP_SPEED	#push the player in the air
 					MAX_SPEED = MAX_SPEED_AIR	#set maximum speed to speed in the air
-					
+
 			#playerHeight = get_global_transform().origin - floorHeight	#calculate player height base on the latest floor position
 			if onEdge and (Input.is_action_just_pressed("jump")):
 				#move player on top of an obstacle
 				vel.y = JUMP_SPEED
 				jumpState = "jumpOnTop"
-			
+
 			elif not is_on_floor():
 			#elif playerHeight[1] > 4 or playerHeight[1] < 0:
 				#if the player has a certain height
@@ -116,53 +121,54 @@ func process_input():
 						vel.y = JUMP_SPEED
 						ACCEL = ACCEL_DEF*2
 						jumpState = "jumpRight"
-		
+
 					if $RayRight.is_colliding()and jumpState != "jumpLeft":
 						vel.y = JUMP_SPEED
 						ACCEL = ACCEL_DEF*2
 						jumpState = "jumpLeft"
-					
+
 					if not $RayRight.is_colliding() and not $RayLeft.is_colliding():	
 						if $RayFront.is_colliding() and jumpState != "jumpBackward":
 							vel.y = JUMP_SPEED
 							ACCEL = ACCEL_DEF*2
 							jumpState = "jumpBackward"
-		
+
 						if $RayBack.is_colliding()and jumpState != "jumpForward":
 							vel.y = JUMP_SPEED
 							ACCEL = ACCEL_DEF*2
 							jumpState = "jumpForward"
 			#--------------#
-			
+
 			input_movement_vector = input_movement_vector.normalized()
-		
+
 			dir += -cam_xform.basis.z.normalized() * input_movement_vector.y
 			dir += cam_xform.basis.x.normalized() * input_movement_vector.x
 
 func process_movement(delta):
-    dir.y = 0
-    dir = dir.normalized()
+	dir.y = 0
+	dir = dir.normalized()
 
-    vel.y += delta * GRAVITY
+	vel.y += delta * GRAVITY
+	vel.y = clamp(vel.y, -100, 100);
 
-    var hvel = vel
-    hvel.y = 0
+	var hvel = vel
+	hvel.y = 0
 
-    var target = dir
-    target *= MAX_SPEED
+	var target = dir
+	target *= MAX_SPEED
 
-    var accel
-    if dir.dot(hvel) > 0:
-        accel = ACCEL
-    else:
-        accel = DEACCEL
+	var accel
+	if dir.dot(hvel) > 0:
+		accel = ACCEL
+	else:
+		accel = DEACCEL
 
-    hvel = hvel.linear_interpolate(target, accel * delta)
-    vel.x = hvel.x
-    vel.z = hvel.z
-    vel = move_and_slide(vel, Vector3(0, 1, 0), 0.05, 4, deg2rad(MAX_SLOPE_ANGLE))
-    if playerAttributes.MultiPlayer:
-   	 rpc_unreliable("puppet_pos",get_translation())
+	hvel = hvel.linear_interpolate(target, accel * delta)
+	vel.x = hvel.x
+	vel.z = hvel.z
+	vel = move_and_slide(vel, Vector3(0, 1, 0), 0.05, 4, deg2rad(MAX_SLOPE_ANGLE))
+	if playerAttributes.MultiPlayer:
+		rpc_unreliable("puppet_pos",get_translation())
 
 func _input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:

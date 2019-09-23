@@ -25,17 +25,17 @@ func _move_pickable():
 		elif  not spawnCoordinates.empty():
 			spawnCoordinates.shuffle()
 			tempCell = gridMap.world_to_map(spawnCoordinates.front())
-			pickable.set_translation(spawnCoordinates.front()+ Vector3(0,-3,0))
+			pickable.set_translation(spawnCoordinates.front()+ Vector3(0,-2,0))
 		
 
 	elif playerAttributes.MultiPlayer && get_tree().get_network_unique_id() == 1:
 		#only the host can move the pickable and publish the new position to clients
 		spawnCoordinates.shuffle()
 		if  not spawnCoordinates.empty():
-			pickable.set_translation(spawnCoordinates.front()+ Vector3(0,-3,0))
+			pickable.set_translation(spawnCoordinates.front()+ Vector3(0,-2,0))
 			for id in playerAttributes.player2IDs:
 				#send every client the new position
-				rpc_id(id, "move_pick_c", var2str(spawnCoordinates.front()+ Vector3(0,-3,0)))
+				rpc_id(id, "move_pick_c", var2str(spawnCoordinates.front()+ Vector3(0,-2,0)))
 	
 	elif playerAttributes.MultiPlayer:
 		#if a client is first, send the host to move the pickable

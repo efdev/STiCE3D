@@ -16,11 +16,11 @@ transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 34, 0, 0 )
 
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource( 4 )
-cell_size = Vector3( 12, 12, 12 )
+cell_size = Vector3( 6, 6, 6 )
 collision_layer = 515
 collision_mask = 515
 data = {
-"cells": PoolIntArray(  )
+"cells": PoolIntArray( 196615, 0, 0 )
 }
 __meta__ = {
 "_editor_clip_": 0,
