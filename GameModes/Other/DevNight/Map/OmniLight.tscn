@@ -1,0 +1,6 @@
+[gd_scene format=2]
+
+[node name="OmniLight" type="OmniLight"]
+light_energy = 0.2
+shadow_enabled = true
+omni_range = 7.0

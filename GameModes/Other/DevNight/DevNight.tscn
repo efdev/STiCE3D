@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://GameModes/Other/DevNight/Map/CubeMeshText.meshlib" type="MeshLibrary" id=1]
+[ext_resource path="res://GameModes/Other/DevNight/ResetArea/ResetGround.tscn" type="PackedScene" id=2]
+[ext_resource path="res://GameModes/Other/DevNight/Map/DevNight.gd" type="Script" id=3]
+
+
+
+
+[node name="GameMode_1" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="GameMap" type="GridMap" parent="."]
+mesh_library = ExtResource( 1 )
+collision_layer = 513
+collision_mask = 513
+data = {
+"cells": PoolIntArray(  )
+}
+__meta__ = {
+"_editor_clip_": 0
+}
+
+[node name="ResetGround" parent="." instance=ExtResource( 2 )]
+transform = Transform( 100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -5, 0 )

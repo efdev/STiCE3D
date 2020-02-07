@@ -1,0 +1,101 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://LevelDefaults/DefaultHUD/DefHud.gd" type="Script" id=1]
+[ext_resource path="res://Textures/crosshair.png" type="Texture" id=2]
+[ext_resource path="res://Textures/mediumFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Textures/MenuThem.tres" type="Theme" id=4]
+
+[node name="HUD" type="Control" groups=[
+"HUD",
+]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 4 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="fpsCounter" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -112.0
+margin_top = 10.0
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( 22.9175, 8.64226 )
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 1, 0.819608, 0, 1 )
+text = "fps"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TileBox" type="VBoxContainer" parent="."]
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 40.0
+margin_bottom = 40.0
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="actualTiles" type="Label" parent="TileBox"]
+margin_right = 181.0
+margin_bottom = 25.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 1, 0.819608, 0, 1 )
+text = "Actual: 0"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="recordTiles" type="Label" parent="TileBox"]
+margin_top = 35.0
+margin_right = 181.0
+margin_bottom = 60.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 1, 0.819608, 0, 1 )
+text = "Record: 0"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="worstTiles" type="Label" parent="TileBox"]
+margin_top = 70.0
+margin_right = 181.0
+margin_bottom = 95.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 1, 0.819608, 0, 1 )
+text = "worst: 0"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

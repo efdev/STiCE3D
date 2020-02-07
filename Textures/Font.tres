@@ -1,0 +1,10 @@
+[gd_resource type="DynamicFont" load_steps=2 format=2]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://Textures/Alexis 3D.ttf"
+
+[resource]
+size = 60
+use_filter = true
+extra_spacing_char = 6
+font_data = SubResource( 1 )

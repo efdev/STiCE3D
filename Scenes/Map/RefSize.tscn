@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://GameModes/Other/DevNight/Map/DevMat.tres" type="Material" id=1]
+
+
+
+
+
+
+
+[sub_resource type="CubeMesh" id=4]
+material = ExtResource( 1 )
+
+[sub_resource type="BoxShape" id=52]
+
+[node name="RefSize" type="Spatial"]
+
+[node name="RefObs" type="MeshInstance" parent="."]
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="RefObs"]
+collision_layer = 513
+collision_mask = 513
+
+[node name="CollisionShape" type="CollisionShape" parent="RefObs/StaticBody"]
+shape = SubResource( 52 )
