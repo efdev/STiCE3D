@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://MainMenu/Scenes/mainMenu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://GameEntryPoint/gameModePreview.tscn" type="PackedScene" id=2]
+[ext_resource path="res://GameModes/DevDay/DevDay.tscn" type="PackedScene" id=3]
+
+[node name="GameEntryPoint" type="Spatial"]
+
+[node name="GameView" type="ViewportContainer" parent="."]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameViewport" type="Viewport" parent="GameView"]
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="CurrentGame" type="Spatial" parent="GameView/GameViewport"]
+
+[node name="GameMode_1" parent="GameView/GameViewport/CurrentGame" instance=ExtResource( 3 )]
+
+[node name="GameUI" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainMenu" parent="." instance=ExtResource( 1 )]
+gameViewportContainerPath = NodePath("../GameView")
+gameViewportPath = NodePath("../GameView/GameViewport")
+userInterfacePath = NodePath("../GameUI")
+mainMenuPath = NodePath("MaineMenuEntries/resumeButton")
+
+[node name="playButton" parent="MainMenu/MaineMenuEntries" index="1"]
+sceneToShowOnPress = ExtResource( 2 )
+
+[editable path="MainMenu"]

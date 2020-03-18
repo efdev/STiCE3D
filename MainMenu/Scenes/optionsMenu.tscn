@@ -1,0 +1,201 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Textures/defaultTheme.tres" type="Theme" id=1]
+[ext_resource path="res://MainMenu/Scripts/optionsMenu.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.168627, 0.168627, 0.168627, 0.415686 )
+
+[node name="optionsMenu" type="Control"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 1.90002
+margin_top = -299.05
+margin_right = 1025.9
+margin_bottom = 300.95
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+fullscreenPath = NodePath("settingsTabs/regularSettings/fullscreenHBox/fullscreenCheckBox")
+vSyncPath = NodePath("settingsTabs/regularSettings/vSyncHBox3/vSyncCheckBox")
+fpsLimitPath = NodePath("settingsTabs/regularSettings/fpsLimitHBox/fpsLimitInput")
+mouseSensPath = NodePath("settingsTabs/regularSettings/mouseSensitivityHBox/mouseSensSlider")
+renderQualityPath = NodePath("settingsTabs/regularSettings/renderQualityHBox/renderQualitySlider")
+popupPath = NodePath("popupError")
+errorMessagePath = NodePath("popupError/ErrorDialog")
+
+[node name="popupError" type="PopupDialog" parent="."]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ErrorDialog" type="Label" parent="popupError"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -92.5
+margin_top = -16.0
+margin_right = 92.5
+margin_bottom = 16.0
+theme = ExtResource( 1 )
+custom_styles/normal = SubResource( 1 )
+custom_colors/font_color = Color( 0.552941, 0.145098, 0.145098, 1 )
+text = "Default Error!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="settingsTabs" type="TabContainer" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -57.0
+margin_right = 255.0
+margin_bottom = 57.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="regularSettings" type="VBoxContainer" parent="settingsTabs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 47.0
+margin_right = -5.0
+margin_bottom = -5.0
+
+[node name="resolutionHBox" type="HBoxContainer" parent="settingsTabs/regularSettings"]
+margin_right = 647.0
+margin_bottom = 40.0
+custom_constants/separation = 108
+
+[node name="resolutionLabel" type="Label" parent="settingsTabs/regularSettings/resolutionHBox"]
+margin_right = 136.0
+margin_bottom = 40.0
+theme = ExtResource( 1 )
+text = "Resolution"
+
+[node name="resolutionOptionButton" type="OptionButton" parent="settingsTabs/regularSettings/resolutionHBox"]
+margin_left = 244.0
+margin_right = 366.0
+margin_bottom = 40.0
+text = "Default"
+flat = true
+items = [ "2560x1440", null, false, 0, null, "1920x1200", null, false, 1, null, "1920x1080", null, false, 2, null, "Default", null, false, 3, null ]
+selected = 3
+
+[node name="renderQualityHBox" type="HBoxContainer" parent="settingsTabs/regularSettings"]
+margin_top = 44.0
+margin_right = 647.0
+margin_bottom = 84.0
+theme = ExtResource( 1 )
+custom_constants/separation = 60
+
+[node name="renderQualityLabel" type="Label" parent="settingsTabs/regularSettings/renderQualityHBox"]
+margin_right = 188.0
+margin_bottom = 40.0
+theme = ExtResource( 1 )
+text = "Render Quality"
+
+[node name="renderQualitySlider" type="HSlider" parent="settingsTabs/regularSettings/renderQualityHBox"]
+margin_left = 248.0
+margin_right = 448.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 200, 0 )
+min_value = 0.1
+max_value = 1.0
+step = 0.1
+value = 1.0
+tick_count = 10
+ticks_on_borders = true
+
+[node name="mouseSensitivityHBox" type="HBoxContainer" parent="settingsTabs/regularSettings"]
+margin_top = 88.0
+margin_right = 647.0
+margin_bottom = 128.0
+custom_constants/separation = 36
+
+[node name="mouseSensLabel" type="Label" parent="settingsTabs/regularSettings/mouseSensitivityHBox"]
+margin_right = 211.0
+margin_bottom = 40.0
+text = "Mouse Sensitivity"
+
+[node name="mouseSensSlider" type="HSlider" parent="settingsTabs/regularSettings/mouseSensitivityHBox"]
+margin_left = 247.0
+margin_right = 647.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 400, 0 )
+max_value = 1.0
+step = 0.01
+value = 0.05
+tick_count = 100
+
+[node name="fpsLimitHBox" type="HBoxContainer" parent="settingsTabs/regularSettings"]
+margin_top = 132.0
+margin_right = 647.0
+margin_bottom = 172.0
+custom_constants/separation = 137
+
+[node name="fpsLimitLabel" type="Label" parent="settingsTabs/regularSettings/fpsLimitHBox"]
+margin_right = 111.0
+margin_bottom = 40.0
+text = "Max FPS"
+
+[node name="fpsLimitInput" type="LineEdit" parent="settingsTabs/regularSettings/fpsLimitHBox"]
+margin_left = 248.0
+margin_right = 356.0
+margin_bottom = 40.0
+theme = ExtResource( 1 )
+text = "0"
+align = 1
+
+[node name="vSyncHBox3" type="HBoxContainer" parent="settingsTabs/regularSettings"]
+margin_top = 176.0
+margin_right = 647.0
+margin_bottom = 216.0
+
+[node name="vSyncCheckBox" type="CheckBox" parent="settingsTabs/regularSettings/vSyncHBox3"]
+margin_right = 97.0
+margin_bottom = 40.0
+theme = ExtResource( 1 )
+pressed = true
+text = "vSync"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="fullscreenHBox" type="HBoxContainer" parent="settingsTabs/regularSettings"]
+margin_top = 220.0
+margin_right = 647.0
+margin_bottom = 260.0
+
+[node name="fullscreenCheckBox" type="CheckBox" parent="settingsTabs/regularSettings/fullscreenHBox"]
+margin_right = 152.0
+margin_bottom = 40.0
+theme = ExtResource( 1 )
+text = "Fullscreen"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="item_selected" from="settingsTabs/regularSettings/resolutionHBox/resolutionOptionButton" to="." method="_on_resolutionOptionButton_item_selected"]
+[connection signal="value_changed" from="settingsTabs/regularSettings/renderQualityHBox/renderQualitySlider" to="." method="_on_renderQualitySlider_value_changed"]
+[connection signal="value_changed" from="settingsTabs/regularSettings/mouseSensitivityHBox/mouseSensSlider" to="." method="_on_mouseSensSlider_value_changed"]
+[connection signal="text_changed" from="settingsTabs/regularSettings/fpsLimitHBox/fpsLimitInput" to="." method="_on_fpsLimitInput_text_changed"]
+[connection signal="toggled" from="settingsTabs/regularSettings/vSyncHBox3/vSyncCheckBox" to="." method="_on_vSyncCheckBox_toggled"]
+[connection signal="toggled" from="settingsTabs/regularSettings/fullscreenHBox/fullscreenCheckBox" to="." method="_on_fullscreenCheckBox_toggled"]

@@ -1,0 +1,128 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://Textures/MenuEntrys/optionsButton/optionsButtonHover.png" type="Texture" id=1]
+[ext_resource path="res://Textures/MenuEntrys/exitButton/exitButtonRegular.png" type="Texture" id=2]
+[ext_resource path="res://Textures/MenuEntrys/exitButton/exitButtonPressed.png" type="Texture" id=3]
+[ext_resource path="res://MainMenu/Scenes/optionsMenu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Textures/MenuEntrys/exitButton/exitButtonFocused.png" type="Texture" id=5]
+[ext_resource path="res://Textures/MenuEntrys/exitButton/exitButtonHover.png" type="Texture" id=6]
+[ext_resource path="res://Textures/MenuEntrys/playButton/playButtonHover.png" type="Texture" id=7]
+[ext_resource path="res://Textures/MenuEntrys/optionsButton/optionsButtonPressed.png" type="Texture" id=8]
+[ext_resource path="res://Textures/MenuEntrys/playButton/playButtonPressed.png" type="Texture" id=9]
+[ext_resource path="res://Textures/MenuEntrys/playButton/playButtonFocused.png" type="Texture" id=10]
+[ext_resource path="res://Textures/MenuEntrys/optionsButton/optionsButtonRegular.png" type="Texture" id=11]
+[ext_resource path="res://MainMenu/Scripts/mainMenuButton.gd" type="Script" id=12]
+[ext_resource path="res://Textures/MenuEntrys/optionsButton/optionsButtonFocused.png" type="Texture" id=13]
+[ext_resource path="res://Textures/MenuEntrys/playButton/playButtonRegular.png" type="Texture" id=14]
+[ext_resource path="res://Textures/MenuEntrys/resumeButton/exitButtonFocused.png" type="Texture" id=15]
+[ext_resource path="res://Textures/MenuEntrys/resumeButton/resumeButtonPressed.png" type="Texture" id=16]
+[ext_resource path="res://Textures/MenuEntrys/resumeButton/resumeButtonRegular.png" type="Texture" id=17]
+[ext_resource path="res://Textures/MenuEntrys/resumeButton/resumeButtonHover.png" type="Texture" id=18]
+[ext_resource path="res://MainMenu/Scripts/setViewportVariables.gd" type="Script" id=19]
+
+[node name="MainMenu" type="Control"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -300.0
+margin_right = 1024.0
+margin_bottom = 300.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MaineMenuEntries" type="VBoxContainer" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 100.0
+margin_top = -174.5
+margin_right = 147.0
+margin_bottom = 174.5
+custom_constants/separation = 80
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="resumeButton" type="TextureButton" parent="MaineMenuEntries"]
+margin_right = 121.0
+margin_bottom = 29.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 16 )
+texture_hover = ExtResource( 18 )
+texture_focused = ExtResource( 15 )
+stretch_mode = 4
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+whereToAddTheScene = NodePath("../../OtherMenu")
+shouldInvisibleOnResume = NodePath("../..")
+playButton = true
+
+[node name="playButton" type="TextureButton" parent="MaineMenuEntries"]
+margin_top = 109.0
+margin_right = 87.0
+margin_bottom = 137.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource( 14 )
+texture_pressed = ExtResource( 9 )
+texture_hover = ExtResource( 7 )
+texture_focused = ExtResource( 10 )
+stretch_mode = 4
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+whereToAddTheScene = NodePath("../../OtherMenu")
+playButton = true
+
+[node name="optionsButton" type="TextureButton" parent="MaineMenuEntries"]
+margin_top = 217.0
+margin_right = 147.0
+margin_bottom = 244.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource( 11 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 1 )
+texture_focused = ExtResource( 13 )
+stretch_mode = 4
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+sceneToShowOnPress = ExtResource( 4 )
+whereToAddTheScene = NodePath("../../OtherMenu")
+
+[node name="exitButton" type="TextureButton" parent="MaineMenuEntries"]
+margin_top = 324.0
+margin_right = 84.0
+margin_bottom = 349.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 6 )
+texture_focused = ExtResource( 5 )
+stretch_mode = 4
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OtherMenu" type="Control" parent="."]
+anchor_top = 0.2
+anchor_bottom = 0.2
+margin_left = 350.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="MaineMenuEntries/resumeButton" to="MaineMenuEntries/resumeButton" method="_on_resumeButton_pressed"]
+[connection signal="pressed" from="MaineMenuEntries/playButton" to="MaineMenuEntries/playButton" method="_on_playButton_pressed"]
+[connection signal="pressed" from="MaineMenuEntries/optionsButton" to="MaineMenuEntries/optionsButton" method="_on_optionsButton_pressed"]
+[connection signal="pressed" from="MaineMenuEntries/exitButton" to="MaineMenuEntries/exitButton" method="_on_exitButton_pressed"]

@@ -1,0 +1,137 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Textures/defaultTheme.tres" type="Theme" id=1]
+[ext_resource path="res://GameModes/DevDay/DevDay.png" type="Texture" id=2]
+[ext_resource path="res://GameEntryPoint/gameModePreview.gd" type="Script" id=3]
+[ext_resource path="res://Textures/Font/Analecta.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Textures/Arrows/arrowRight.png" type="Texture" id=5]
+[ext_resource path="res://Textures/Arrows/arrowLeft.png" type="Texture" id=6]
+[ext_resource path="res://Textures/Arrows/arrowLeftPressed.png" type="Texture" id=7]
+[ext_resource path="res://Textures/Arrows/arrowRightPressed.png" type="Texture" id=8]
+[ext_resource path="res://Textures/SelectButton/selectButtonHover.png" type="Texture" id=9]
+[ext_resource path="res://Textures/SelectButton/selectButtonFocused.png" type="Texture" id=10]
+[ext_resource path="res://Textures/SelectButton/selectButtonRegular.png" type="Texture" id=11]
+[ext_resource path="res://Textures/SelectButton/selectButtonPressed.png" type="Texture" id=12]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 4 )
+
+[node name="gameModePreview" type="Control"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -300.0
+margin_right = 1024.0
+margin_bottom = 300.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+previewLabel = NodePath("previewLabel")
+gameModeDescription = NodePath("gameModeDescription")
+previewPicture = NodePath("previewPicture")
+
+[node name="previewLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -179.5
+margin_top = 90.0
+margin_right = 85.5
+margin_bottom = 130.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Development Day Map"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gameModeDescriptionLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -22.0
+margin_top = -140.0
+margin_right = 119.0
+margin_bottom = -100.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Description"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="previewPicture" type="TextureRect" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = -1.0
+margin_top = -85.0
+margin_right = 399.0
+margin_bottom = 215.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 2 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gameModeDescription" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -22.0
+margin_top = -85.0
+margin_right = 401.0
+margin_bottom = 215.0
+text = "Das ist ein beliebiger Text der Erklärt was dieser Spielmodus macht oh mand das ding ist nicht breit genug"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="arrowRight" type="TextureButton" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 300.0
+margin_top = -50.0
+margin_right = 433.0
+margin_bottom = 103.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="arrowLeft" type="TextureButton" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 50.0
+margin_top = -50.0
+margin_right = 183.0
+margin_bottom = 103.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="selectButton" type="TextureButton" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 800.0
+margin_top = -50.0
+margin_right = 926.0
+margin_bottom = -24.0
+texture_normal = ExtResource( 11 )
+texture_pressed = ExtResource( 12 )
+texture_hover = ExtResource( 9 )
+texture_focused = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="arrowRight" to="." method="_on_arrowRight_pressed"]
+[connection signal="pressed" from="arrowLeft" to="." method="_on_arrowLeft_pressed"]
+[connection signal="pressed" from="selectButton" to="." method="_on_selectButton_pressed"]
