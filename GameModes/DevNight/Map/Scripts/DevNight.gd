@@ -5,10 +5,8 @@ var mapCells : Array
 var collectedCounter : int = 0
 var collectedSum : int = 0
 export(PackedScene) var playerScene = null
-#var HUD : Array 
 
 func _ready():
-	#HUD = get_tree().get_nodes_in_group("HUD")
 	randomize()
 	_buildSpawnPosition()
 	_spawnCollectable()
@@ -16,10 +14,10 @@ func _ready():
 	_buildMap()
 	_setInitialRespawn()
 		
-#	var val = Config._loadSomethingFromConfig("DevNight", "SumCollected")
-#	if val != null:
-#		collectedSum = val
-#		_setSumPick(val)
+	var val  = Settings.saveGames.get_value("DevNight", "SumCollected", 0)
+	if val != 0:
+		collectedSum = val
+		_setSumPick(val)
 		
 func _buildMap() -> void:
 	if not mapCells.empty():
@@ -57,16 +55,16 @@ func _collectableCollected(var body : Spatial) -> void:
 		$Player._resetPlayer($ResetGround/SafePoint.translation)
 		$Player.rotation = Vector3($Player.rotation.x, 180, $Player.rotation.z )
 		_buildMap()
-#		_setSumPick(collectedSum)
-#		_setCurrentPickCount(collectedCounter)
+		_setSumPick(collectedSum)
+		_setCurrentPickCount(collectedCounter)
 		return
 	$ResetGround._setSafePoint($Collectable.translation)
 	_setGameObjects()
-#	_setSumPick(collectedSum)
-#	_setCurrentPickCount(collectedCounter)
+	_setSumPick(collectedSum)
+	_setCurrentPickCount(collectedCounter)
 	
 func _spawnPlayer() -> void:
-#	var playerScene = preload("res://Scenes/Player/Player.tscn")
+
 	var player : Spatial = playerScene.instance()
 	player._setEnvironment(preload("res://GameModes/DevNight/Map/Other/gameEnv.tres"))
 	player.add_child(preload("res://GameModes/DevNight/Map/Scenes/OmniLight.tscn").instance())
@@ -93,16 +91,13 @@ func _buildSpawnPosition() -> void:
 	$GameMap.set_cell_item(1,6,0,0,0)
 	$GameMap.set_cell_item(1,6,1,0,0)
 	
-#func _setSumPick(var val : int) -> void:
-#	if not HUD.empty():
-#		Config._saveSomethingInConfig("DevNight", "SumCollected", val)
-#		HUD[0]._setSumPick(val)
+func _setSumPick(var val : int) -> void:
+	Settings.saveGames.set_value("DevNight", "SumCollected", val)
+	Settings.saveGames.save(Settings.saveGamesPath)
+	Settings.ui._setSumPick(val)
 
-#func _setCurrentPickCount(var val : int) -> void:
-#	if not HUD.empty():
-#		HUD[0]._setCurrentPickCount(val)
-#
-
+func _setCurrentPickCount(var val : int) -> void:
+	Settings.ui._setCurrentPickCount(val)
 	
 	
 

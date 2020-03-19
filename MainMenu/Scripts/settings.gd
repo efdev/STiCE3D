@@ -1,7 +1,9 @@
 extends Node
 
 var configFile : ConfigFile
+var saveGames : ConfigFile
 const path = "user://config.ini"
+const saveGamesPath = "user://saveGame.ini"
 
 func _saveInSettings(var section : String, var keyName : String ,var val) -> int:
 	configFile.set_value(section, keyName, val)
@@ -19,6 +21,11 @@ func _ready():
 	var err : int = configFile.load(path)
 	if err == ERR_FILE_NOT_FOUND:
 		err = _saveSettings()
+	
+	saveGames = ConfigFile.new()
+	err = saveGames.load(saveGamesPath)
+	if err == ERR_FILE_NOT_FOUND:
+		err = saveGames.save(saveGamesPath)
 
 	var modFolder : Directory = Directory.new()
 	if not modFolder.dir_exists("user://Mods"):
@@ -33,6 +40,7 @@ var viewportGame = null
 var viewportContainer = null
 var userInterface = null
 var mainMenu = null
+var ui = null
 		
 func _setNewRenderQuality():
 	if !automaticRes:

@@ -82,8 +82,12 @@ func _on_selectButton_pressed():
 					Settings.viewportGame.remove_child(Settings.viewportGame.get_child(0))
 				if(Settings.userInterface.get_child_count() >0):
 					Settings.userInterface.remove_child(Settings.userInterface.get_child(0))
-				Settings.viewportGame.add_child(load(path).instance())
+					
 				Settings.userInterface.add_child(load(pathUI).instance())
+				Settings.ui = Settings.userInterface.get_child(0)
+	
+				Settings.viewportGame.add_child(load(path).instance())
+
 				Settings.mainMenu._on_resumeButton_pressed()
 			
 
