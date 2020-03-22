@@ -1,0 +1,95 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://GameModes/DevDay/Player/Scripts/CameraController.gd" type="Script" id=1]
+[ext_resource path="res://GameModes/DevDay/Player/Scripts/CharacterController.gd" type="Script" id=2]
+[ext_resource path="res://default_env.tres" type="Environment" id=3]
+
+[sub_resource type="CapsuleMesh" id=1]
+
+[sub_resource type="CapsuleShape" id=2]
+
+[node name="Player" type="KinematicBody"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+collision_layer = 3
+collision_mask = 3
+collision/safe_margin = 0.005
+script = ExtResource( 2 )
+
+[node name="PlayerMesh" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="PlayerCollision" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="Rays" type="Spatial" parent="."]
+
+[node name="RayFront" type="RayCast" parent="Rays"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+enabled = true
+cast_to = Vector3( 0, 0, -1.5 )
+collision_mask = 512
+
+[node name="RayFront2" type="RayCast" parent="Rays"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0 )
+enabled = true
+cast_to = Vector3( 0, 0, -2 )
+collision_mask = 512
+
+[node name="RayFront3" type="RayCast" parent="Rays"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0 )
+enabled = true
+cast_to = Vector3( 0, 0, -2 )
+collision_mask = 512
+
+[node name="RayGround" type="RayCast" parent="Rays"]
+enabled = true
+cast_to = Vector3( 0, -1.6, 0 )
+collision_mask = 512
+
+[node name="RayBack" type="RayCast" parent="Rays"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+enabled = true
+cast_to = Vector3( 0, 0, 1.5 )
+collision_mask = 512
+
+[node name="RayLeft" type="RayCast" parent="Rays"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+enabled = true
+cast_to = Vector3( -1.75, 0, 0 )
+collision_mask = 512
+
+[node name="RayRight" type="RayCast" parent="Rays"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+enabled = true
+cast_to = Vector3( 1.75, 0, 0 )
+collision_mask = 512
+
+[node name="RayHead" type="RayCast" parent="Rays"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0 )
+enabled = true
+cast_to = Vector3( 0, 0, -1.5 )
+collision_mask = 512
+
+[node name="RayFoot" type="RayCast" parent="Rays"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.4, 0 )
+enabled = true
+cast_to = Vector3( 0, 0, -1.5 )
+collision_mask = 512
+
+[node name="RotationHelper" type="Spatial" parent="."]
+
+[node name="Camera" type="Camera" parent="RotationHelper" groups=[
+"Player",
+]]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.6, 0.5 )
+environment = ExtResource( 3 )
+current = true
+fov = 75.0
+script = ExtResource( 1 )
+playerPath = NodePath("../..")
+
+[node name="3rdCamera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.825143, 0.564924, 0, -0.564924, 0.825143, 0, 2.99007, 3.28407 )

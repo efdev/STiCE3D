@@ -29,23 +29,34 @@ func _ready():
 	var err : int = gameModeFile.load(pathGameModes)
 	if err == ERR_FILE_NOT_FOUND:
 		err = gameModeFile.save(pathGameModes)
-	gameModeFile.set_value("DevDay", "Path", "res://GameModes/DevDay/")
-	gameModeFile.set_value("DevDay", "Description", "This is a simple generated map for testing purpose."+
-													"The UI only counts the collected points and every" +
-													"five collected points the map is new generated.")
-	gameModeFile.set_value("DevDay", "previewPath", "res://GameModes/DevDay/DevDay.png")
-	gameModeFile.set_value("DevDay", "uiPath", "res://GameModes/DevDay/HUD/Scenes/DevDay.tscn")
-	gameModeFile.set_value("DevDay", "gamePath", "res://GameModes/DevDay/DevDay.tscn")
-	gameModeFile.set_value("DevDay", "anotherMenu", false)
+		gameModeFile.set_value("DevDay", "Path", "res://GameModes/DevDay/")
+		gameModeFile.set_value("DevDay", "Description", "This is a simple generated map for testing purpose."+
+														"The UI only counts the collected points and every" +
+														"five collected points the map is new generated.")
+		gameModeFile.set_value("DevDay", "previewPath", "res://GameModes/DevDay/DevDay.png")
+		gameModeFile.set_value("DevDay", "uiPath", "res://GameModes/DevDay/HUD/Scenes/DevDay.tscn")
+		gameModeFile.set_value("DevDay", "gamePath", "res://GameModes/DevDay/DevDay.tscn")
+		gameModeFile.set_value("DevDay", "anotherMenu", false)
+		
+		gameModeFile.set_value("DevNight", "Path", "res://GameModes/DevNight/")
+		gameModeFile.set_value("DevNight", "Description", "This is a simple generated map for testing purpose."+
+														"The UI only counts the collected points and every" +
+														"five collected points the map is new generated.")
+		gameModeFile.set_value("DevNight", "previewPath", "res://GameModes/DevNight/DevNight.png")
+		gameModeFile.set_value("DevNight", "uiPath", "res://GameModes/DevNight/HUD/Scenes/DevNight.tscn")
+		gameModeFile.set_value("DevNight", "gamePath", "res://GameModes/DevNight/DevNight.tscn")
+		gameModeFile.set_value("DevNight", "anotherMenu", false)
+		
+		gameModeFile.set_value("DevNew", "Path", "res://GameModes/DevNew/")
+		gameModeFile.set_value("DevNew", "Description", "This is a simple generated map for testing purpose."+
+														"The UI only counts the collected points and every" +
+														"five collected points the map is new generated.")
+		gameModeFile.set_value("DevNew", "previewPath", "res://GameModes/DevNew/DevNew.png")
+		gameModeFile.set_value("DevNew", "uiPath", "res://GameModes/DevNew/HUD/Scenes/DevNew.tscn")
+		gameModeFile.set_value("DevNew", "gamePath", "res://GameModes/DevNew/DevNew.tscn")
+		gameModeFile.set_value("DevNew", "anotherMenu", false)
 	
-	gameModeFile.set_value("DevNight", "Path", "res://GameModes/DevNight/")
-	gameModeFile.set_value("DevNight", "Description", "This is a simple generated map for testing purpose."+
-													"The UI only counts the collected points and every" +
-													"five collected points the map is new generated.")
-	gameModeFile.set_value("DevNight", "previewPath", "res://GameModes/DevNight/DevNight.png")
-	gameModeFile.set_value("DevNight", "uiPath", "res://GameModes/DevNight/HUD/Scenes/DevNight.tscn")
-	gameModeFile.set_value("DevNight", "gamePath", "res://GameModes/DevNight/DevNight.tscn")
-	gameModeFile.set_value("DevNight", "anotherMenu", false)
+		err = gameModeFile.save(pathGameModes)
 
 	gameModes = gameModeFile.get_sections()
 	gameModeCount = gameModes.size()

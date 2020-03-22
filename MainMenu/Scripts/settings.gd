@@ -32,6 +32,7 @@ func _ready():
 		err = modFolder.make_dir("user://Mods")
 
 var mouseSens : float = 0.05
+var FOV : int = 75
 var renderQuality: float = 1
 var automaticRes: bool = true
 var resWidth: int
@@ -41,6 +42,8 @@ var viewportContainer = null
 var userInterface = null
 var mainMenu = null
 var ui = null
+
+var currentCamera = null
 		
 func _setNewRenderQuality():
 	if !automaticRes:

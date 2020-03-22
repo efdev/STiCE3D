@@ -23,8 +23,21 @@ vSyncPath = NodePath("settingsTabs/regularSettings/vSyncHBox3/vSyncCheckBox")
 fpsLimitPath = NodePath("settingsTabs/regularSettings/fpsLimitHBox/fpsLimitInput")
 mouseSensPath = NodePath("settingsTabs/regularSettings/mouseSensitivityHBox/mouseSensSlider")
 renderQualityPath = NodePath("settingsTabs/regularSettings/renderQualityHBox/renderQualitySlider")
+resolutionPath = NodePath("settingsTabs/regularSettings/resolutionHBox/resolutionOptionButton")
+fovPath = NodePath("settingsTabs/regularSettings/FOV/fovInput")
 popupPath = NodePath("popupError")
 errorMessagePath = NodePath("popupError/ErrorDialog")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -90.0
+margin_right = 800.0
+margin_bottom = 301.0
+color = Color( 0.352941, 0.352941, 0.352941, 0.156863 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="popupError" type="PopupDialog" parent="."]
 visible = true
@@ -163,10 +176,29 @@ theme = ExtResource( 1 )
 text = "0"
 align = 1
 
-[node name="vSyncHBox3" type="HBoxContainer" parent="settingsTabs/regularSettings"]
+[node name="FOV" type="HBoxContainer" parent="settingsTabs/regularSettings"]
 margin_top = 176.0
 margin_right = 647.0
 margin_bottom = 216.0
+custom_constants/separation = 187
+
+[node name="fovLabel" type="Label" parent="settingsTabs/regularSettings/FOV"]
+margin_right = 61.0
+margin_bottom = 40.0
+text = "FOV"
+
+[node name="fovInput" type="LineEdit" parent="settingsTabs/regularSettings/FOV"]
+margin_left = 248.0
+margin_right = 356.0
+margin_bottom = 40.0
+theme = ExtResource( 1 )
+text = "75"
+align = 1
+
+[node name="vSyncHBox3" type="HBoxContainer" parent="settingsTabs/regularSettings"]
+margin_top = 220.0
+margin_right = 647.0
+margin_bottom = 260.0
 
 [node name="vSyncCheckBox" type="CheckBox" parent="settingsTabs/regularSettings/vSyncHBox3"]
 margin_right = 97.0
@@ -180,9 +212,9 @@ __meta__ = {
 }
 
 [node name="fullscreenHBox" type="HBoxContainer" parent="settingsTabs/regularSettings"]
-margin_top = 220.0
+margin_top = 264.0
 margin_right = 647.0
-margin_bottom = 260.0
+margin_bottom = 304.0
 
 [node name="fullscreenCheckBox" type="CheckBox" parent="settingsTabs/regularSettings/fullscreenHBox"]
 margin_right = 152.0
@@ -196,6 +228,7 @@ __meta__ = {
 [connection signal="item_selected" from="settingsTabs/regularSettings/resolutionHBox/resolutionOptionButton" to="." method="_on_resolutionOptionButton_item_selected"]
 [connection signal="value_changed" from="settingsTabs/regularSettings/renderQualityHBox/renderQualitySlider" to="." method="_on_renderQualitySlider_value_changed"]
 [connection signal="value_changed" from="settingsTabs/regularSettings/mouseSensitivityHBox/mouseSensSlider" to="." method="_on_mouseSensSlider_value_changed"]
-[connection signal="text_changed" from="settingsTabs/regularSettings/fpsLimitHBox/fpsLimitInput" to="." method="_on_fpsLimitInput_text_changed"]
+[connection signal="text_entered" from="settingsTabs/regularSettings/fpsLimitHBox/fpsLimitInput" to="." method="_on_fpsLimitInput_text_entered"]
+[connection signal="text_entered" from="settingsTabs/regularSettings/FOV/fovInput" to="." method="_on_fovInput_text_entered"]
 [connection signal="toggled" from="settingsTabs/regularSettings/vSyncHBox3/vSyncCheckBox" to="." method="_on_vSyncCheckBox_toggled"]
 [connection signal="toggled" from="settingsTabs/regularSettings/fullscreenHBox/fullscreenCheckBox" to="." method="_on_fullscreenCheckBox_toggled"]

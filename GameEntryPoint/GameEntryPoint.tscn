@@ -32,9 +32,10 @@ render_target_update_mode = 3
 [node name="CurrentGame" type="Spatial" parent="GameView/GameViewport"]
 
 [node name="Camera" type="Camera" parent="GameView/GameViewport/CurrentGame"]
-transform = Transform( 1, 0, 0, 0, 0.816893, -0.576789, 0, 0.576789, 0.816893, 0, 0, 0 )
+transform = Transform( 0.587785, 0.392219, 0.707582, 0, 0.87462, -0.48481, -0.809017, 0.284964, 0.514089, 0, 0, 0 )
 environment = SubResource( 2 )
 current = true
+fov = 60.0
 
 [node name="GameUI" type="Control" parent="."]
 anchor_right = 1.0

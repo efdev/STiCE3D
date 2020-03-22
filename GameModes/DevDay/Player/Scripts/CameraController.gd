@@ -12,6 +12,8 @@ func _ready() -> void:
 	cam = $"."
 	rotationHelper = $"../"
 	player = get_node(playerPath)
+	Settings.currentCamera = $"."
+	$".".fov = Settings.FOV
 	
 func _input(event) -> void:
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:

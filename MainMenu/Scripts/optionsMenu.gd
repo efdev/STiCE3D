@@ -5,6 +5,8 @@ export(NodePath) var vSyncPath = null
 export(NodePath) var fpsLimitPath = null
 export(NodePath) var mouseSensPath = null
 export(NodePath) var renderQualityPath = null
+export(NodePath) var resolutionPath = null
+export(NodePath) var fovPath = null
 
 func _loadFullscreen():
 	if(fullscreenPath != null):
@@ -18,7 +20,7 @@ func _loadFpsLimit():
 	if(fpsLimitPath != null):
 		var ret = Settings.configFile.get_value("Settings", "FPSLimit", "0")
 		get_node(fpsLimitPath).text = ret
-		get_node(fpsLimitPath).emit_signal("text_changed", ret)
+		get_node(fpsLimitPath).emit_signal("text_entered", ret)
 
 func _loadMouseSens():			
 	if(mouseSensPath != null):
@@ -33,20 +35,33 @@ func _loadRenderQuality():
 		Settings.renderQuality = ret
 		Settings._setNewRenderQuality()
 
+func _loadResolution():
+	if(resolutionPath != null):
+		var ret = Settings.configFile.get_value("Settings", "Resolution", 3)
+		_on_resolutionOptionButton_item_selected(ret)
+		get_node(resolutionPath).selected = ret
+		
+func _loadFov():
+	if(fovPath != null):
+		var ret = Settings.configFile.get_value("Settings", "FOV", "75")
+		Settings.FOV = ret
+		get_node(fovPath).text = String(ret)
+
+
+
 func _reloadSettings():
 	_loadFullscreen()
 	_loadVSync()
 	_loadFpsLimit()
 	_loadMouseSens()
 	_loadRenderQuality()
+	_loadResolution()
+	_loadFov()
 
 func _notification(what):
 	match what:
 		NOTIFICATION_INSTANCED:
 			_reloadSettings()
-			
-#func _ready():
-#	_reloadSettings() # Replace with function body.
 	
 export(NodePath) var popupPath = null
 export(NodePath) var errorMessagePath = null
@@ -119,13 +134,27 @@ func _on_mouseSensSlider_value_changed(value):
 	if(Settings._saveInSettings("Settings", "Mouse Sensitivity", value) != OK):
 		_popupError("Error on saving Settings")
 
-func _on_fpsLimitInput_text_changed(var value: String):
-	Engine.target_fps = value.to_int()
-	if(Settings._saveInSettings("Settings", "FPS Limit", value) != OK):
-		_popupError("Error on saving Settings")
-
 func _on_fullscreenCheckBox_toggled(button_pressed):
 	OS.window_fullscreen = button_pressed
 	if(Settings._saveInSettings("Settings", "Fullscreen", button_pressed) != OK):
 		_popupError("Error on saving Settings")
 	Settings._setNewRenderQuality()
+
+func _on_fovInput_text_entered(value):
+	var temp = value.to_int()
+	if(temp > 140):
+		temp = 140
+	elif(temp < 50):
+		temp = 50
+	
+	if(Settings._saveInSettings("Settings", "FOV", temp) != OK):
+		_popupError("Error on saving Settings")
+	Settings.FOV = temp
+	if(Settings.currentCamera != null):
+		Settings.currentCamera.fov = temp
+
+
+func _on_fpsLimitInput_text_entered(value):
+	Engine.target_fps = value.to_int()
+	if(Settings._saveInSettings("Settings", "FPS Limit", value) != OK):
+		_popupError("Error on saving Settings")
