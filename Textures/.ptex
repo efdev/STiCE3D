@@ -1,0 +1,97 @@
+{
+	"connections": [
+		{
+			"from": "tex3d_apply",
+			"from_port": 0,
+			"to": "Material",
+			"to_port": 0
+		},
+		{
+			"from": "tex3d_pattern_2",
+			"from_port": 0,
+			"to": "tex3d_apply",
+			"to_port": 2
+		}
+	],
+	"label": "Graph",
+	"name": "@@74",
+	"node_position": {
+		"x": 0,
+		"y": 0
+	},
+	"nodes": [
+		{
+			"export_paths": {
+
+			},
+			"name": "Material",
+			"node_position": {
+				"x": 616,
+				"y": 48
+			},
+			"parameters": {
+				"albedo_color": {
+					"a": 1,
+					"b": 0.668945,
+					"g": 0.668945,
+					"r": 0.668945,
+					"type": "Color"
+				},
+				"ao": 0,
+				"depth_scale": 0.5,
+				"emission_energy": 0,
+				"metallic": 0,
+				"normal": 1,
+				"roughness": 1,
+				"size": 12,
+				"sss": 0
+			},
+			"type": "material"
+		},
+		{
+			"name": "tex3d_apply",
+			"node_position": {
+				"x": 368.5,
+				"y": 180
+			},
+			"parameters": {
+
+			},
+			"seed_value": 62235,
+			"type": "tex3d_apply"
+		},
+		{
+			"name": "tex3d_pattern_2",
+			"node_position": {
+				"x": -231.5,
+				"y": 226
+			},
+			"parameters": {
+				"mix": 4,
+				"x_scale": 1,
+				"x_wave": 2,
+				"y_scale": 1,
+				"y_wave": 2,
+				"z_scale": 1,
+				"z_wave": 2
+			},
+			"type": "tex3d_pattern"
+		},
+		{
+			"name": "blend",
+			"node_position": {
+				"x": 12.5,
+				"y": 95.75
+			},
+			"parameters": {
+				"amount": 0.5,
+				"blend_type": 0
+			},
+			"type": "blend"
+		}
+	],
+	"parameters": {
+
+	},
+	"type": "graph"
+}

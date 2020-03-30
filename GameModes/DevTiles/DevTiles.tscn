@@ -1,0 +1,137 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://GameModes/DevNew/Map/Scripts/DevNew.gd" type="Script" id=1]
+[ext_resource path="res://GameModes/DevDay/Map/Other/CubeMeshText.meshlib" type="MeshLibrary" id=2]
+[ext_resource path="res://GameModes/DevDay/ResetArea/Scenes/ResetGround.tscn" type="PackedScene" id=3]
+[ext_resource path="res://GameModes/DevTiles/Player/Scenes/Player.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="CubeMesh" id=2]
+
+[sub_resource type="BoxShape" id=3]
+
+[sub_resource type="OpenSimplexNoise" id=4]
+seed = 4
+period = 0.1
+lacunarity = 4.0
+
+[sub_resource type="NoiseTexture" id=5]
+width = 1024
+height = 1024
+seamless = true
+noise = SubResource( 4 )
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.662745, 0.662745, 0.662745, 1 )
+albedo_texture = SubResource( 5 )
+
+[sub_resource type="CubeMesh" id=7]
+material = SubResource( 6 )
+
+[node name="GameMode_1" type="Spatial"]
+script = ExtResource( 1 )
+playerScene = ExtResource( 4 )
+
+[node name="GameMap" type="GridMap" parent="."]
+mesh_library = ExtResource( 2 )
+collision_layer = 513
+collision_mask = 513
+data = {
+"cells": PoolIntArray(  )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 0, 0 )
+}
+
+[node name="ResetGround" parent="." instance=ExtResource( 3 )]
+transform = Transform( 100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -5, 0 )
+SafePoint = NodePath("../SafePoint")
+
+[node name="SafePoint" parent="ResetGround" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.359, 0 )
+
+[node name="SafePoint" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.49938, 0 )
+visible = false
+
+[node name="MeshInstance" type="MeshInstance" parent="SafePoint"]
+transform = Transform( 0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="."]
+transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0 )
+collision_layer = 513
+collision_mask = 513
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+shape = SubResource( 3 )
+
+[node name="StaticBody2" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 7.00506 )
+collision_layer = 513
+collision_mask = 513
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody2"]
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
+shape = SubResource( 3 )
+
+[node name="StaticBody3" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 7.00506 )
+collision_layer = 513
+collision_mask = 513
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody3"]
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody3"]
+shape = SubResource( 3 )
+
+[node name="StaticBody4" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, 7.00506 )
+collision_layer = 513
+collision_mask = 513
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody4"]
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody4"]
+shape = SubResource( 3 )
+
+[node name="StaticBody5" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 7.00506 )
+collision_layer = 513
+collision_mask = 513
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody5"]
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody5"]
+shape = SubResource( 3 )
+
+[node name="StaticBody6" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 5.00506 )
+collision_layer = 513
+collision_mask = 513
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody6"]
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody6"]
+shape = SubResource( 3 )
+
+[editable path="ResetGround"]

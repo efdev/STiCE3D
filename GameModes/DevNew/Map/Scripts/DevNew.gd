@@ -55,7 +55,12 @@ func _buildMapPart(var fromX, var fromZ, var toX, var toZ):
 				pass #empty cell
 			else:
 				spawnCoordinates.push_back($GameMap.map_to_world(curX,pillarHeight+1,curZ))
-				$GameMap.set_cell_item(curX,pillarHeight,curZ, 1, 0)
+				$GameMap.set_cell_item(curX,pillarHeight,curZ, 0, 0)
+				var changeColor = preload("res://GameModes/DevNew/ChangeColor/ColorField.tscn").instance()
+				changeColor._setCellPosition(Vector3(curX, pillarHeight, curZ))
+				changeColor.translation = $GameMap.map_to_world(curX, pillarHeight, curZ) + Vector3(0,1.01,0)
+				changeColor.connect("changeColor", self, "changeColor")
+				$GameMap.add_child(changeColor)
 				for y in pillarHeight:
 					$GameMap.set_cell_item(curX,y,curZ, 0, 0) #build the pillar
 			
@@ -63,7 +68,11 @@ func _buildMapPart(var fromX, var fromZ, var toX, var toZ):
 		curZ = fromZ
 		curX += 1
 				
-		
+func changeColor(var position):
+	print(position)
+	$GameMap.set_cell_item(position.x, position.y, position.z, 1, 0)
+	pass
+	
 func _buildMap() -> void:
 	$GameMap.clear()
 	_buildSpawnPosition()
@@ -72,7 +81,9 @@ func _buildMap() -> void:
 #			$GameMap.set_cell_item(i.x,i.y,i.z, -1,0)
 #		mapCells.clear()
 	spawnCoordinates.clear()
-	_buildMapPart(0, 0, 32,32)
+	for i in $GameMap.get_child_count():
+		$GameMap.get_child(i).queue_free()
+	_buildMapPart(0, 0, 16,16)
 	spawnCoordinates.shuffle()
 	_setGameObjects()
 
@@ -117,14 +128,14 @@ func _setInitialRespawn() -> void:
 	$ResetGround._setSafePoint($GameMap.map_to_world(-1,11,-1) + Vector3(0,3,0))
 	
 func _buildSpawnPosition() -> void:
-	$GameMap.set_cell_item(-1,11,-1,0,0)
-	$GameMap.set_cell_item(-1,11,-2,0,0)
-	$GameMap.set_cell_item(-2,11,-1,0,0)
-	$GameMap.set_cell_item(-2,11,-2,0,0)
+	$GameMap.set_cell_item(-1,11,-1,1,0)
+	$GameMap.set_cell_item(-1,11,-2,1,0)
+	$GameMap.set_cell_item(-2,11,-1,1,0)
+	$GameMap.set_cell_item(-2,11,-2,1,0)
 
 func _setSumPick(var val : int) -> void:
 	Settings.saveGames.set_value("DevNew", "SumCollected", val)
-	Settings.saveGames.save(Settings.saveGamesPath)
+	var temp = Settings.saveGames.save(Settings.saveGamesPath)
 	Settings.ui._setSumPick(val)
 
 func _setCurrentPickCount(var val : int) -> void:
