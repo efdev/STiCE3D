@@ -139,6 +139,7 @@ func _setInitialRespawn() -> void:
 	$ResetGround._setSafePoint($GameMap.map_to_world(-1,11,-1) + Vector3(0,3,0))
 	
 func _buildSpawnPosition() -> void:
+	pass
 	$GameMap.set_cell_item(-1,11,-1,0,0)
 	$GameMap.set_cell_item(-1,11,-2,0,0)
 	$GameMap.set_cell_item(-2,11,-1,0,0)
